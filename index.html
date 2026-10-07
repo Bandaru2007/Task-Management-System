@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TaskFlow - Task Management System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">✓</div>
+            <div>
+                <h2>TaskFlow</h2>
+                <span>Task Manager</span>
+            </div>
+        </div>
+
+        <nav>
+            <a href="#" class="nav-item active" onclick="showSection('dashboard')">
+                🏠 Dashboard
+            </a>
+
+            <a href="#" class="nav-item" onclick="showSection('tasks')">
+                📋 My Tasks
+            </a>
+
+            <a href="#" class="nav-item" onclick="openTaskModal()">
+                ➕ Add Task
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <p>Stay organized.</p>
+            <strong>Get things done 🚀</strong>
+        </div>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="main">
+
+        <!-- Header -->
+        <header class="topbar">
+
+            <div>
+                <p class="welcome">Welcome back 👋</p>
+                <h1>Manage Your Tasks</h1>
+            </div>
+
+            <button class="add-btn" onclick="openTaskModal()">
+                + Add New Task
+            </button>
+
+        </header>
+
+
+        <!-- Dashboard -->
+        <section id="dashboard">
+
+            <!-- Statistics -->
+            <div class="stats">
+
+                <div class="stat-card">
+                    <div class="stat-icon blue">📋</div>
+                    <div>
+                        <p>Total Tasks</p>
+                        <h2 id="totalTasks">0</h2>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon orange">⏳</div>
+                    <div>
+                        <p>In Progress</p>
+                        <h2 id="progressTasks">0</h2>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon green">✓</div>
+                    <div>
+                        <p>Completed</p>
+                        <h2 id="completedTasks">0</h2>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon red">🔥</div>
+                    <div>
+                        <p>High Priority</p>
+                        <h2 id="highTasks">0</h2>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- Progress -->
+            <div class="progress-card">
+
+                <div class="progress-heading">
+                    <div>
+                        <h3>Overall Progress</h3>
+                        <p>Keep going, you're doing great!</p>
+                    </div>
+
+                    <strong id="progressPercent">0%</strong>
+                </div>
+
+                <div class="progress-bar">
+                    <div id="progressFill"></div>
+                </div>
+
+            </div>
+
+
+            <!-- Task Section -->
+            <div class="task-section">
+
+                <div class="section-header">
+
+                    <div>
+                        <h2>My Tasks</h2>
+                        <p>Manage and track your daily tasks</p>
+                    </div>
+
+                    <div class="controls">
+
+                        <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="🔍 Search tasks..."
+                            onkeyup="displayTasks()"
+                        >
+
+                        <select id="filterSelect" onchange="displayTasks()">
+                            <option value="all">All Tasks</option>
+                            <option value="todo">To Do</option>
+                            <option value="progress">In Progress</option>
+                            <option value="completed">Completed</option>
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div id="taskContainer" class="task-grid"></div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Add Task Modal -->
+    <div id="taskModal" class="modal">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <div>
+                    <h2 id="modalTitle">Add New Task</h2>
+                    <p>Create a task and stay organized.</p>
+                </div>
+
+                <button class="close-btn" onclick="closeTaskModal()">×</button>
+            </div>
+
+
+            <form id="taskForm">
+
+                <input type="hidden" id="editId">
+
+                <label>Task Title</label>
+                <input
+                    type="text"
+                    id="taskTitle"
+                    placeholder="Enter task title"
+                    required
+                >
+
+                <label>Description</label>
+                <textarea
+                    id="taskDescription"
+                    placeholder="Enter task description"
+                    required
+                ></textarea>
+
+
+                <div class="form-row">
+
+                    <div>
+                        <label>Due Date</label>
+                        <input type="date" id="taskDate" required>
+                    </div>
+
+                    <div>
+                        <label>Priority</label>
+
+                        <select id="taskPriority">
+                            <option value="high">High</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <label>Status</label>
+
+                <select id="taskStatus">
+                    <option value="todo">To Do</option>
+                    <option value="progress">In Progress</option>
+                    <option value="completed">Completed</option>
+                </select>
+
+
+                <div class="form-buttons">
+                    <button
+                        type="button"
+                        class="cancel-btn"
+                        onclick="closeTaskModal()">
+                        Cancel
+                    </button>
+
+                    <button type="submit" class="save-btn">
+                        Save Task
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
